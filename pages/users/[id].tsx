@@ -1,19 +1,19 @@
+import { FC } from 'react'
 import { GetStaticProps, GetStaticPaths } from 'next'
+import { User } from 'interfaces'
+import { sampleUserData } from 'utils/sample-data'
+import Layout from 'components/Layout'
+import ListDetail from 'components/ListDetail'
 
-import { User } from '../../interfaces'
-import { sampleUserData } from '../../utils/sample-data'
-import Layout from '../../components/Layout'
-import ListDetail from '../../components/ListDetail'
-
-type Props = {
+interface Props {
   item?: User
   errors?: string
 }
 
-const StaticPropsDetail = ({ item, errors }: Props) => {
-  if (errors) {
+const StaticPropsDetail: FC<Props> = ({ item, errors }) => {
+  if (errors !== '') {
     return (
-      <Layout title="Error | Next.js + TypeScript Example">
+      <Layout title='Error | Next.js + TypeScript Example'>
         <p>
           <span style={{ color: 'red' }}>Error:</span> {errors}
         </p>
@@ -24,10 +24,10 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
   return (
     <Layout
       title={`${
-        item ? item.name : 'User Detail'
+        item != null ? item.name : 'User Detail'
       } | Next.js + TypeScript Example`}
     >
-      {item && <ListDetail item={item} />}
+      {item != null && <ListDetail item={item} />}
     </Layout>
   )
 }
@@ -37,7 +37,7 @@ export default StaticPropsDetail
 export const getStaticPaths: GetStaticPaths = async () => {
   // Get the paths we want to pre-render based on users
   const paths = sampleUserData.map((user) => ({
-    params: { id: user.id.toString() },
+    params: { id: user.id.toString() }
   }))
 
   // We'll pre-render only these paths at build time.
