@@ -1,4 +1,6 @@
 {
+  "name": "nextjs-standardjs-tailwindcss-typescript-jest-cypress-template",
+  "description": "NextJS template using StandardJS (ts-standard), TypeScript, TailwindCSS, Jest, Cypress",
   "private": true,
   "scripts": {
     "build": "next build",
